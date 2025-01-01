@@ -8,16 +8,94 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.IO.Font;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
 
 
 namespace nobetdagitim
 {
 
-    public partial class Form1 : Form
+    public partial class NobetDagitim : Form
     {
 
+         private void PdfKaydetme()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF Files|*.pdf";
+            saveFileDialog.Title = "Nöbet Listesini PDF Olarak Kaydet";
+            saveFileDialog.FileName = "NobetDagitimListesi.pdf";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+
+                    using (PdfWriter writer = new PdfWriter(saveFileDialog.FileName))
+                    using (PdfDocument pdf = new PdfDocument(writer))
+                    using (Document dokuman = new Document(pdf))
+                    {
+
+                        dokuman.Add(new Paragraph("Nöbet Dağıtım Listesi")
+                            .SetFontSize(18)
+                            .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+
+                        dokuman.Add(new Paragraph("\n"));
+
+
+                        for (int gun = 1; gun <= 7; gun++)
+                        {
+
+                            string gunAdi = gun switch
+                            {
+                                1 => "Pazartesi",
+                                2 => "Salı",
+                                3 => "Çarşamba",
+                                4 => "Perşembe",
+                                5 => "Cuma",
+                                6 => "Cumartesi",
+                                7 => "Pazar",
+                                _ => ""
+                            };
+
+                            dokuman.Add(new Paragraph(gunAdi)
+                                .SetFont(iText.Kernel.Font.PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA_BOLD))
+                                .SetFontSize(14));
+
+
+
+                            for (int saat = 1; saat <= 8; saat++)
+                            {
+                                TextBox txt = this.Controls.Find($"txtGun{gun}Saat{saat}", true).FirstOrDefault() as TextBox;
+                                if (txt != null && !string.IsNullOrWhiteSpace(txt.Text))
+                                {
+                                    dokuman.Add(new Paragraph($"Saat {saat}: {txt.Text}")
+                                        .SetFontSize(12));
+                                }
+                            }
+
+                            dokuman.Add(new Paragraph("\n"));
+                        }
+                    }
+
+                    MessageBox.Show("PDF başarıyla kaydedildi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"PDF kaydedilemedi: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        } 
+
+
+
+
         private MySqlConnection baglan;
-        public Form1()
+        public NobetDagitim()
         {
             InitializeComponent();
             VeriGetir();
@@ -245,6 +323,11 @@ namespace nobetdagitim
 
                 Gorunurluk();
             }
+        }
+
+        private void btnkaydet_Click(object sender, EventArgs e)
+        {
+            PdfKaydetme();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace nobetdagitim
 {
-    partial class Form1
+    partial class NobetDagitim
     {
         /// <summary>
         ///Gerekli tasarımcı değişkeni.
@@ -110,6 +110,7 @@
             this.txtGun7Saat3 = new System.Windows.Forms.TextBox();
             this.txtGun7Saat2 = new System.Windows.Forms.TextBox();
             this.txtGun7Saat1 = new System.Windows.Forms.TextBox();
+            this.btnkaydet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -204,7 +205,7 @@
             // 
             this.btnDagit.BackColor = System.Drawing.Color.LightYellow;
             this.btnDagit.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnDagit.Location = new System.Drawing.Point(146, 251);
+            this.btnDagit.Location = new System.Drawing.Point(146, 240);
             this.btnDagit.Name = "btnDagit";
             this.btnDagit.Size = new System.Drawing.Size(161, 32);
             this.btnDagit.TabIndex = 9;
@@ -835,12 +836,25 @@
             this.txtGun7Saat1.TabIndex = 74;
             this.txtGun7Saat1.Visible = false;
             // 
-            // Form1
+            // btnkaydet
+            // 
+            this.btnkaydet.BackColor = System.Drawing.Color.LightYellow;
+            this.btnkaydet.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnkaydet.Location = new System.Drawing.Point(146, 278);
+            this.btnkaydet.Name = "btnkaydet";
+            this.btnkaydet.Size = new System.Drawing.Size(161, 32);
+            this.btnkaydet.TabIndex = 82;
+            this.btnkaydet.Text = "Kaydet";
+            this.btnkaydet.UseVisualStyleBackColor = false;
+            this.btnkaydet.Click += new System.EventHandler(this.btnkaydet_Click);
+            // 
+            // NobetDagitim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(1291, 765);
+            this.Controls.Add(this.btnkaydet);
             this.Controls.Add(this.txtGun7Saat8);
             this.Controls.Add(this.txtGun7Saat7);
             this.Controls.Add(this.txtGun7Saat6);
@@ -923,8 +937,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Nöbet Ekranı";
+            this.Name = "NobetDagitim";
+            this.Text = "Nöbet Dağıtım Ekranı";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonel)).EndInit();
             this.ResumeLayout(false);
@@ -1016,6 +1030,7 @@
         private System.Windows.Forms.TextBox txtGun7Saat3;
         private System.Windows.Forms.TextBox txtGun7Saat2;
         private System.Windows.Forms.TextBox txtGun7Saat1;
+        private System.Windows.Forms.Button btnkaydet;
     }
 }
 
